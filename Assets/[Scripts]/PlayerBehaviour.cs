@@ -17,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void Move()
     {
-        float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * moveSpeed;
+        float x = Input.GetAxisRaw("Horizontal") * moveSpeed;
 
         transform.position += new Vector3(x, 0, 0) * Time.deltaTime;
         float clampedPosition = Mathf.Clamp(transform.position.x, boundary.min, boundary.max);

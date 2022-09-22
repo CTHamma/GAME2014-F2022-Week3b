@@ -15,7 +15,7 @@ public class BGStarsBehaviour : MonoBehaviour
 
     public void Move()
     {
-        transform.position -= new Vector3(0.0f, verticalSpeed);
+        transform.position -= new Vector3(0.0f, verticalSpeed) * Time.deltaTime;
     }
 
     public void CheckBounds()

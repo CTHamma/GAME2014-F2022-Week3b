@@ -315,6 +315,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3372169470572015737, guid: 57b8b2830d176b247976c98b270b89ff, type: 3}
+      propertyPath: usingMobileInput
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4320089170772848175, guid: 57b8b2830d176b247976c98b270b89ff, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
       value: 17

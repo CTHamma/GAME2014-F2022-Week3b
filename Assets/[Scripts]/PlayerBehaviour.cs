@@ -8,20 +8,52 @@ public class PlayerBehaviour : MonoBehaviour
     public float moveSpeed = 10.0f;
     public Boundary boundary;
     public float veritcalPos;
+    public float veritcalSpeed = 10.0f;
+    public bool usingMobileInput = false;
+
+    private Camera camera;
+
+    private void Start()
+    {
+        camera = Camera.main;
+
+        usingMobileInput = Application.platform == RuntimePlatform.Android ||
+                            Application.platform == RuntimePlatform.IPhonePlayer;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if (usingMobileInput)
+        {
+            MobileInput();
+        }
+        else
+        {
+            ConventionalInput();
+        }
         Move();
     }
 
     public void Move()
     {
-        float x = Input.GetAxisRaw("Horizontal") * moveSpeed;
-
-        transform.position += new Vector3(x, 0, 0) * Time.deltaTime;
         float clampedPosition = Mathf.Clamp(transform.position.x, boundary.min, boundary.max);
         transform.position = new Vector2(clampedPosition, veritcalPos);
+    }
+
+    public void MobileInput()
+    {
+        foreach (var touch in Input.touches)
+        {
+            var destination = camera.ScreenToWorldPoint(touch.position);
+            transform.position = Vector2.Lerp(transform.position, destination, Time.deltaTime * veritcalSpeed);
+        }
+    }
+
+    public void ConventionalInput()
+    {
+        float x = Input.GetAxisRaw("Horizontal") * Time.deltaTime * moveSpeed;
+        transform.position += new Vector3(x, 0, 0);
     }
 
 }
